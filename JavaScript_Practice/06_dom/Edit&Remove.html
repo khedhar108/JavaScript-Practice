@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chai aur code | DOM</title>
+  </head>
+  <body style="background-color: #212121; color: #fff">
+    <ul class="language">
+      <li>1. Javascript</li>
+    </ul>
+  </body>
+  <script>
+    //------------ whole tree is traversed in this method--------------
+    // function addLanguage(langName){
+    //     const li = document.createElement('li');
+    //     li.innerHTML = `${langName}`
+    //     document.querySelector('.language').appendChild(li)
+    // }
+    // addLanguage("python")
+    // addLanguage("typescript")
+
+    // -----------------creating and adding------------------------
+    function addOptiLanguage(langName) {
+      const li = document.createElement("li");
+      li.appendChild(document.createTextNode(langName));
+      document.querySelector(".language").appendChild(li);
+    }
+    addOptiLanguage("golang");
+    addOptiLanguage("python");
+    addOptiLanguage("javascript");
+
+    //Edit
+    const secondLang = document.querySelector("li:nth-child(2)");
+    console.log("secondlang", secondLang);
+    //secondLang.innerHTML = "Mojo"
+    const newli = document.createElement("li");
+    // newli.textContent = "Mojo"
+    newli.innerHTML = "Mojoto";
+    secondLang.replaceWith(newli);
+
+    //=========================edit===================
+    const firstLang = document.querySelector("li:first-child");
+    console.log("firstLang", firstLang);
+    firstLang.outerHTML = "<li>TypeScript</li>";
+    //  Use the outerHTML when you want to completely replace an element and its contents. Use innerHTML when you only want to replace the contents of the element.
+
+    //========================remove=====================
+    const lastLang = document.querySelector("li:last-child");
+    lastLang.remove();
+  </script>
+</html>

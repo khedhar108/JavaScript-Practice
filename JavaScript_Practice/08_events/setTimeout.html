@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Chai aur code</h1>
+    <button id="stop">Stop</button>
+  </body>
+  <script>
+    /*======Broswer methods not core Js features===========*/
+    // --------------------------------------------------------------------------
+    // setTimeout(function(){} , milliseconds);
+    setTimeout(function () {
+      console.log("pradeep");
+    }, 2000);
+
+    // setTimeout(()=> , milliseconds);
+    setTimeout(() => console.log("repeat once after 5 sec"), 5000);
+    // --------------------------------------------------------------
+    // setTimeout(callback/handler----->referenceOnlyWithoutExecution -no parenthesis , milliseconds);
+    const sayHitesh = function () {
+      console.log("Hitesh");
+    };
+    setTimeout(sayHitesh, 2000);
+
+    /*======================Handling SetTimeOut==============================*/
+    const changeText = function () {
+      document.querySelector("h1").innerHTML = "best JS series";
+    };
+
+    const changeMe2 = setTimeout(changeText, 2000);
+    const stopBtn = document.querySelector("#stop");
+    // only pass reference of setTimeout --storing in a variable
+    /*******************------------Syntax-1-----------********************************/
+    stopBtn.addEventListener("click", () => clearTimeout(changeMe2));
+
+    /*-------Syntax 2------*/
+    // stopBtn.addEventListener("click", function () {
+    //   clearTimeout(changeMe2); // only pass reference of setTimeout --storing in a variable
+    //   console.log("STOPPED");
+    // });
+  </script>
+</html>

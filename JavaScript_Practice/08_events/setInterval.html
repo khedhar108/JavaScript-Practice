@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 class="colorchange">Js with Pradeep</h1>
+    <button type="button" id="start">Start</button>
+    <button type="button" id="stop">Stop</button>
+  </body>
+  <script>
+    // note: setInterval(funRef, delay, args)====> return unique intervalId , Pass this id refference in clearInterval(intervalIdRef)
+
+    const sayDateWithName = function (name) {
+      console.log(`hi ${name}`, Date.now());
+    };
+    // setInterval(sayDateWithName("pradeep")) // dircetly start
+
+    const startBtn = document.getElementById("start");
+    startBtn.style.backgroundColor = "green";
+    /* ------------mehtod-1.1===Reference---- functional expression---no return & no { } ------*/
+    let intervalId;
+    const startInterval = () => (
+      (intervalId = setInterval(sayDateWithName, 3000, "Rohan")),
+      // (const intervalId = setInterval(sayDateWithName, 3000, "Rohan")),// wrong syntax 👎
+      console.log("start interval")
+    );
+
+    /* ------------mehtod-1.2===Reference-------- traditional fucntion-----*/
+    // function startInterval ()  {
+    //   const intervalId = setInterval(sayDateWithName, 3000, "Rohan");
+    //   console.log(intervalId);
+    //   return intervalId;
+    // };
+
+    // providing reference of callback
+    startBtn.addEventListener("click", startInterval);
+    const stopInterval = () => (
+      clearInterval(intervalId), console.log("stoped")
+    );
+    const stopBtn = document.getElementById("stop");
+    stopBtn.style.backgroundColor = "red";
+    stopBtn.addEventListener("click", stopInterval);
+
+    /* --------------------method-2 direct pass --------------------*/
+    // let intervalId;
+    // startBtn.addEventListener("click", () => {
+    //   intervalId = setInterval(sayDateWithName, 1000, "Rohan");
+    //   console.log("intervalId", intervalId);
+    // });
+    // const stopBtn = document.getElementById("stop");
+    // stopBtn.style.backgroundColor = "red";
+    // // stopBtn.addEventListener("click", () => clearInterval(intervalId));
+    // stopBtn.addEventListener("click", () => {
+    //   console.log(intervalId);
+    //   clearInterval(intervalId);
+    // });
+  </script>
+</html>

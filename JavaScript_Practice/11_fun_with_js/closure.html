@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closure aur chai</title>
+  </head>
+  <body style="background-color: #313131">
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
+    <button id="red">Red</button>
+  </body>
+
+  <script>
+    /*Lexical Scoping : child can access parrent fucntion properites but parent can't access child propeties
+child function can't access another child fuction properties
+*/
+    ////  lexical scoping example:
+
+    // function outer(){
+    //     let username = "Pradeep"
+    //     console.log("Outer can't access child fuc", secret);
+    //     function inner(){
+    //         let secret = "my123"
+    //         console.log("inner can access parrent properties", username);
+    //     }
+    //     function innerTwo(){
+    //         console.log("innerTwo can acces parrent properties", username);
+    //         console.log("children can't share propeties",secret);
+    //     }
+    //     inner()
+    //     innerTwo()
+
+    // }
+    // outer()
+    // console.log("TOO OUTER", username);
+
+    // --------------------------------------------------------------------
+
+    /*Clouser: a feature in js which tells that when a fucntion is returend it has entire lexical scope thats why it can access outer variable  */
+
+    function makeFunc(newcolor) {
+      const name = "Mozilla";
+      function displayName() {
+        console.log(name);
+        console.log(newcolor);
+      }
+      return displayName;
+    }
+
+    const myFunc = makeFunc("purple");
+    myFunc();  // run automatically 
+  </script>
+  <script>
+    /* if there are 100 buttons than following approach is bad*/
+    // document.getElementById("orange").onclick = function(){
+    //     document.body.style.backgroundColor = `orange`
+    // }
+    // document.getElementById("green").onclick = function(){
+    //     document.body.style.backgroundColor = `green`
+    // }
+
+    function clickHandler(color) {
+      // document.body.style.backgroundColor = `${color}` // direct execution  wrong approach
+      function changeColor() {
+        document.body.style.backgroundColor = `${color}`;
+      }
+      return changeColor;
+    }
+    const myClouser1 = clickHandler();
+    // document.getElementById("red").onclick = myClouser1("red"); // not run
+    const myClouser2 = clickHandler("red");
+    // document.getElementById("red").onclick = myClouser2(); //  run automatically
+
+
+    document.getElementById("orange").onclick = clickHandler("orange");
+    document.getElementById("green").onclick = clickHandler("green");
+  </script>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>htnml Events</title>
+  </head>
+  <body style="background-color: #414141; color: aliceblue">
+    <h2>Amazing image</h2>
+    <div>
+      <ul id="images">
+        <li>
+          <img
+            width="200px"
+            id="photoshop"
+            src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt="photoshop"
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="japan"
+            src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="river"
+            src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="owl"
+            src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <li>
+          <img
+            width="200px"
+            id="prayer"
+            onclick="alert('what is this image?');"
+            src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+            alt=""
+          />
+        </li>
+        <!-- ------------------------above img=======below a tag---------------------------------------------------------- -->
+        <li>
+          <a style="color: aliceblue" href="https://google.com" id="google"
+            >Google</a
+          >
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    // Bad prctice to use onclick in script and inside image tag using onclick create issuse while scalling the application
+    // document.getElementById('owl').onclick = function(){
+    //     alert("owl clicked")
+    // }
+
+    /*----===================---event object has so many methods and attributes : some of them which are important----=================---- */
+    // type, timestamp, preventDefault
+    // target, toElement, srcElement, currentTarget,
+    // clientX, clientY, screenX, screenY  -- chekcing user/client location and screen position
+    // altkey, ctrlkey, shiftkey, keyCode    ---this keys are pressed or not
+
+    /* ============event bubbling--false===> target element to outer==============*/
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("clicked inside the ul");
+    // }, false)
+    /*=============== event capturing -- true  ==> outer to inner element================= */
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("owl clicked");
+    // }, true)
+
+    /* ======Stopping propogation======.>here bubbling ==========*/
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("owl clicked");
+    //     e.stopPropagation()
+    // }, false)
+
+    // document.getElementById('google').addEventListener('click',function(e){
+    //     e.preventDefault();  // link will not work
+    //     e.stopPropagation()   // stop propagation(bubbling)--only innertarget will show not outer element 
+    //     console.log("google clicked");
+    // }, false)
+
+    document.querySelector("#images").addEventListener("click", function (e) {
+      console.log(e.target.tagName);
+      if (e.target.tagName === "IMG") {
+        console.log(e.target.id);
+        let removeIt = e.target.parentNode;
+        removeIt.remove();
+      }
+    });
+
+    //removeIt.parentNode.removeChild(removeIt)
+  </script>
+</html>
+
+<!-- event propogation : Bubbling and capturing -->
+<!-- 
+
+Event propagation refers to the process by which events are handled by elements in the DOM tree.
+
+There are two phases of event propagation - capturing and bubbling.
+
+Capturing phase - The event is first captured by the outermost element and propagated inward to the target element.
+
+Bubbling phase - After hitting the target element, the event propagates outward in reverse order from the innermost to outermost element
+
+
+element.addEventListener('click', handler, false); // bubbling phase  -- 
+element.addEventListener('click', handler); //--false: default value ----so-> bubbling phase 
+
+element.addEventListener('click', handler, true); // capturing phase
+
+
+
+
+
+
+
+ -->
